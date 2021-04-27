@@ -1,7 +1,5 @@
 package com.bl.addressbook.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,11 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bl.addressbook.dto.AddressResponseDTO;
 import com.bl.addressbook.dto.PersonDTO;
-import com.bl.addressbook.model.Person;
 import com.bl.addressbook.service.IAddressBookService;
 
 @RestController
@@ -30,8 +27,8 @@ public class AddressBookController {
 	 * @return Added Person
 	 */
 	@PostMapping("/addperson")
-	public ResponseEntity<Person> addPerson(@RequestBody PersonDTO person) {
-		Person addedPerson = addressBook.addPerson(person);
+	public ResponseEntity<AddressResponseDTO> addPerson(@RequestBody PersonDTO person) {
+		AddressResponseDTO addedPerson = addressBook.addPerson(person);
 		return new ResponseEntity<>(addedPerson, HttpStatus.CREATED);
 	}
 	
@@ -40,7 +37,7 @@ public class AddressBookController {
 	 * @return List of Person
 	 */
 	@GetMapping("/all")
-	public ResponseEntity<List<Person>> listPersons(){
+	public ResponseEntity<AddressResponseDTO> listPersons(){
 		return addressBook.listPerson();
 	}
 	
@@ -50,8 +47,8 @@ public class AddressBookController {
 	 * @return Person
 	 */
 	@GetMapping("/find/{id}")
-	public Person findPerson(@PathVariable int id) {
-		return addressBook.findPerson(id);
+	public ResponseEntity<AddressResponseDTO> findPerson(@PathVariable int id) {
+		return new ResponseEntity<>(new AddressResponseDTO("The Contact for the given ID is", addressBook.findPerson(id)), HttpStatus.FOUND);
 	}
 	
 	/**
@@ -70,7 +67,7 @@ public class AddressBookController {
 	 * @return person data
 	 */
 	@PutMapping("/update/{id}")
-	public Person updateContact(@PathVariable int id, @RequestBody PersonDTO person) {
-		return addressBook.updatePerson(id, person);
+	public ResponseEntity<AddressResponseDTO> updateContact(@PathVariable int id, @RequestBody PersonDTO person) {
+		return new ResponseEntity<AddressResponseDTO>(addressBook.updatePerson(id, person), HttpStatus.ACCEPTED);
 	}
 }

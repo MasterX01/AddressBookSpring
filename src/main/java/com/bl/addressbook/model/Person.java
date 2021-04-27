@@ -8,8 +8,11 @@ import javax.persistence.Table;
 
 import com.bl.addressbook.dto.PersonDTO;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "address_book")
+@Data
 public class Person {
 	
 	@Id
@@ -35,7 +38,7 @@ public class Person {
 		this.city = person.getCity();
 		this.state = person.getState();
 		this.zipInt = person.getZipInt();
-		this.pNoInt = person.getpNoInt();
+		this.pNoInt = person.getPNoInt();
 		this.email = person.getEmail();
 		this.type = person.getType();
 	}
@@ -48,19 +51,10 @@ public class Person {
 		this.city = person.getCity();
 		this.state = person.getState();
 		this.zipInt = person.getZipInt();
-		this.pNoInt = person.getpNoInt();
+		this.pNoInt = person.getPNoInt();
 		this.email = person.getEmail();
 		this.type = person.getType();
 	}
 	
-	public int getId() {return id;}
-	public String getFirstName() {return firstName;}
-	public String getLastName() {return lastName;}
-	public String getAddress() {return address;}
-	public String getCity() {return city;}
-	public String getState() {return state;}
-	public int getZipInt() {return zipInt;}
-	public long getpNoInt() {return pNoInt;}
-	public String getEmail() {return email;}
-	public String getType() {return type;}
+	
 }
