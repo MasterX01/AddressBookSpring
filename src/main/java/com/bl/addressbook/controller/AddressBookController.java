@@ -9,15 +9,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bl.addressbook.dto.AddressResponseDTO;
 import com.bl.addressbook.dto.PersonDTO;
 import com.bl.addressbook.service.IAddressBookService;
 
+/**
+ * Controller to contact with frontend
+ * contains API for all the features
+ * @author Akash Saxena
+ */
 @RestController
+@RequestMapping("/swagger-ui.html")
 public class AddressBookController {
 
+	/**
+	 * Service Layer object
+	 */
 	@Autowired
 	IAddressBookService addressBook;
 	
@@ -69,5 +79,17 @@ public class AddressBookController {
 	@PutMapping("/update/{id}")
 	public ResponseEntity<AddressResponseDTO> updateContact(@PathVariable int id, @RequestBody PersonDTO person) {
 		return new ResponseEntity<AddressResponseDTO>(addressBook.updatePerson(id, person), HttpStatus.ACCEPTED);
+	}
+	
+	/**
+	 * API to get all contacts who belong to a given city or state
+	 * @param search
+	 * @return Response entity consisting List of contacts
+	 */
+	@GetMapping("cityorstate/{search}")
+	public ResponseEntity<AddressResponseDTO> searchByCityOrState(@PathVariable String search){
+		return new ResponseEntity<AddressResponseDTO>(
+				new AddressResponseDTO("Here are the contacts to belong to the given city or state", addressBook.findByCityOrState(search)), 
+				HttpStatus.FOUND);
 	}
 }

@@ -1,5 +1,7 @@
 package com.bl.addressbook.service;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 
 import com.bl.addressbook.dto.AddressResponseDTO;
@@ -17,5 +19,7 @@ public interface IAddressBookService {
 	void deletePerson(int id);
 
 	AddressResponseDTO updatePerson(int id, PersonDTO person);
+
+	List<Person> findByCityOrState(String search);
 
 }
