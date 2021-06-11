@@ -3,6 +3,7 @@ package com.bl.addressbook.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +23,7 @@ import com.bl.addressbook.service.IAddressBookService;
  * @author Akash Saxena
  */
 @RestController
-@RequestMapping("/swagger-ui.html")
+@RequestMapping({"/api","/swagger-ui.html"})
 public class AddressBookController {
 
 	/**
@@ -36,6 +37,7 @@ public class AddressBookController {
 	 * @param person
 	 * @return Added Person
 	 */
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/addperson")
 	public ResponseEntity<AddressResponseDTO> addPerson(@RequestBody PersonDTO person) {
 		AddressResponseDTO addedPerson = addressBook.addPerson(person);
@@ -46,6 +48,7 @@ public class AddressBookController {
 	 * API to read all contacts in DB
 	 * @return List of Person
 	 */
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/all")
 	public ResponseEntity<AddressResponseDTO> listPersons(){
 		return addressBook.listPerson();
@@ -56,6 +59,7 @@ public class AddressBookController {
 	 * @param id
 	 * @return Person
 	 */
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/find/{id}")
 	public ResponseEntity<AddressResponseDTO> findPerson(@PathVariable int id) {
 		return new ResponseEntity<>(new AddressResponseDTO("The Contact for the given ID is", addressBook.findPerson(id)), HttpStatus.FOUND);
@@ -65,6 +69,7 @@ public class AddressBookController {
 	 * API to delete contact from DB
 	 * @param contact ID
 	 */
+	@CrossOrigin(origins = "http://localhost:4200")
 	@DeleteMapping("/delete/{id}")
 	public void deleteContact(@PathVariable int id) {
 		addressBook.deletePerson(id);
@@ -76,6 +81,7 @@ public class AddressBookController {
 	 * @param person
 	 * @return person data
 	 */
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PutMapping("/update/{id}")
 	public ResponseEntity<AddressResponseDTO> updateContact(@PathVariable int id, @RequestBody PersonDTO person) {
 		return new ResponseEntity<AddressResponseDTO>(addressBook.updatePerson(id, person), HttpStatus.ACCEPTED);
@@ -86,7 +92,8 @@ public class AddressBookController {
 	 * @param search
 	 * @return Response entity consisting List of contacts
 	 */
-	@GetMapping("cityorstate/{search}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping("/cityorstate/{search}")
 	public ResponseEntity<AddressResponseDTO> searchByCityOrState(@PathVariable String search){
 		return new ResponseEntity<AddressResponseDTO>(
 				new AddressResponseDTO("Here are the contacts to belong to the given city or state", addressBook.findByCityOrState(search)), 

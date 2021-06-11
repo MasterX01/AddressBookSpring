@@ -24,10 +24,10 @@ public class Person {
 	private String address;
 	private String city;
 	private String state;
-	private int zipInt;
-	private long pNoInt;
+	private int zip;
+	private long phone;
 	private String email;
-	private String type;
+//	private String type;
 	
 	public Person() {}
 	
@@ -37,10 +37,10 @@ public class Person {
 		this.address = person.getAddress();
 		this.city = person.getCity();
 		this.state = person.getState();
-		this.zipInt = person.getZipInt();
-		this.pNoInt = person.getPNoInt();
+		this.zip = person.getZip();
+		this.phone = person.getPhone();
 		this.email = person.getEmail();
-		this.type = person.getType();
+//		this.type = person.getType();
 	}
 
 	public Person(int id, PersonDTO person) {
@@ -50,10 +50,10 @@ public class Person {
 		this.address = person.getAddress();
 		this.city = person.getCity();
 		this.state = person.getState();
-		this.zipInt = person.getZipInt();
-		this.pNoInt = person.getPNoInt();
+		this.zip = person.getZip();
+		this.phone = person.getPhone();
 		this.email = person.getEmail();
-		this.type = person.getType();
+//		this.type = person.getType();
 	}
 	
 	

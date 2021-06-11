@@ -3,9 +3,9 @@ spring:
     activate:
       on-profile: Development
    datasource:
-    url: ${url}
-    username: ${username}
-    password: ${password}
+    url: jdbc:mysql://localhost:3306/address_book 
+    username: root 
+    password: masterx 
    jpa:
     hibernate:
       ddl-auto: update

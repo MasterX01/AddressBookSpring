@@ -56,7 +56,8 @@ public class AddressBookService implements IAddressBookService{
 	 */
 	@Override
 	public Person findPerson(int id) {
-		return addressBookRepo.findById(id).orElseThrow(()-> new AddressBookException(exceptionType.CONTACT_NOT_FOUND, "Contact not found for the given ID"));
+		return addressBookRepo.findById(id).orElseThrow(()-> 
+										new AddressBookException(exceptionType.CONTACT_NOT_FOUND, "Contact not found for the given ID"));
 	}
 
 	/**
@@ -86,7 +87,7 @@ public class AddressBookService implements IAddressBookService{
 	 */
 	@Override
 	public List<Person> findByCityOrState(String search) {
-		return addressBookRepo.findByCityOrState(search);
+		return addressBookRepo.findByCityOrState(search, search);
 	}
 	
 }
